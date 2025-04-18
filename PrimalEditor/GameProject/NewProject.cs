@@ -61,11 +61,12 @@ namespace PrimalEditor.GameProject {
 				Debug.Assert(templatesFiles.Any());
 				foreach (var file in templatesFiles) {
 					var temaplate = Serializer.FromFile<ProjectTemplate>(file);
-					temaplate.IconFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), "icon.png"));
+					var dir = Path.GetDirectoryName(file);
+					temaplate.IconFilePath = Path.GetFullPath(Path.Combine(dir, "icon.png"));
 					temaplate.Icon = File.ReadAllBytes(temaplate.IconFilePath);
-					temaplate.ScreenshotFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), "Screenshot.png"));
+					temaplate.ScreenshotFilePath = Path.GetFullPath(Path.Combine(dir, "Screenshot.png"));
 					temaplate.Screenshot = File.ReadAllBytes(temaplate.ScreenshotFilePath);
-					temaplate.ProjectFilePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(file), temaplate.ProjectFile));
+					temaplate.ProjectFilePath = Path.GetFullPath(Path.Combine(dir, temaplate.ProjectFile));
 					_projectTemplates.Add(temaplate);
 				}
 			} catch (Exception ex) {
