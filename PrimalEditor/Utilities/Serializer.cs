@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,7 +15,7 @@ namespace PrimalEditor.Utilities {
 				var serializer = new DataContractSerializer(typeof(T));
 				serializer.WriteObject(fs, instance);
 			} catch (Exception ex) {
-				Console.WriteLine($"Error: {ex.Message}");
+				Debug.WriteLine($"Error: {ex.Message}");
 			}
 		}
 
@@ -25,7 +26,7 @@ namespace PrimalEditor.Utilities {
 				T instance = (T) serializer.ReadObject(fs);
 				return instance;
 			} catch (Exception ex) {
-				Console.WriteLine($"Error: {ex.Message}");
+				Debug.WriteLine($"Error: {ex.Message}");
 				return default(T);
 			}
 		}

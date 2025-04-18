@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace PrimalEditor {
-    public class ViewModelBase : INotifyPropertyChanged {
+	[DataContract(IsReference = true)]
+	public class ViewModelBase : INotifyPropertyChanged {
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) {
