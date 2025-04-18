@@ -21,6 +21,7 @@ namespace PrimalEditor.GameProject {
 		public NewProjectView() {
 			InitializeComponent();
 		}
+#pragma warning disable CS8602, CS8604
 		private void OnCreate_Button_Click(object sender, RoutedEventArgs e) {
 			var vm= DataContext as NewProject;
 			var projectPath = vm.CreateProject(templateListBox.SelectedItem as ProjectTemplate);
@@ -32,5 +33,6 @@ namespace PrimalEditor.GameProject {
 			win.DialogResult = dialogResult;
 			win.Close();
 		}
+#pragma warning restore CS8602, CS8604
 	}
 }

@@ -18,17 +18,18 @@ namespace PrimalEditor.Utilities {
 				Debug.WriteLine($"Error: {ex.Message}");
 			}
 		}
-
-		internal static T FromFile<T>(string path) {
+#pragma warning disable CS8600, CS8603
+		public static T FromFile<T>(string path) {
 			try {
 				using var fs = new FileStream(path, FileMode.Open);
 				var serializer = new DataContractSerializer(typeof(T));
 				T instance = (T) serializer.ReadObject(fs);
-				return instance;
+				return instance!;
 			} catch (Exception ex) {
 				Debug.WriteLine($"Error: {ex.Message}");
-				return default(T);
+				return default;
 			}
 		}
+#pragma warning restore CS8600, CS8603
 	}
 }

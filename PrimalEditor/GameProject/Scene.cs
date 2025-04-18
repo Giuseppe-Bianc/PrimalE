@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PrimalEditor.GameProject {
 	[DataContract]
 	public class Scene : ViewModelBase {
-		private string _name;
+		private string _name = "Name";
 		[DataMember]
 		public string Name {
 			get => _name;

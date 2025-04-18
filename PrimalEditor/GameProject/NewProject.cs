@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 
 namespace PrimalEditor.GameProject {
+#pragma warning disable CS8618
 	[DataContract]
 	public class ProjectTemplate {
 		[DataMember]
@@ -20,6 +21,8 @@ namespace PrimalEditor.GameProject {
 		public string ScreenshotFilePath { get; set; }
 		public string ProjectFilePath { get; set; }
 	}
+#pragma warning restore CS8618
+
 	public class NewProject : ViewModelBase {
 		private readonly string _templatePath = $@"..\..\PrimalEditor\ProjectTemplates\";
 		private string _projectName = "NewProject";
@@ -129,6 +132,7 @@ namespace PrimalEditor.GameProject {
 			}
 		}
 
+#pragma warning disable CS8618
 		public NewProject() {
 			ProjectTemplates = new ReadOnlyObservableCollection<ProjectTemplate>(_projectTemplates);
 			try {
@@ -137,11 +141,11 @@ namespace PrimalEditor.GameProject {
 				foreach (var file in templatesFiles) {
 					var temaplate = Serializer.FromFile<ProjectTemplate>(file);
 					var dir = Path.GetDirectoryName(file);
-					temaplate.IconFilePath = Path.GetFullPath(Path.Combine(dir, "icon.png"));
+					temaplate.IconFilePath = Path.GetFullPath(Path.Combine(dir!, path2: "icon.png"));
 					temaplate.Icon = File.ReadAllBytes(temaplate.IconFilePath);
-					temaplate.ScreenshotFilePath = Path.GetFullPath(Path.Combine(dir, "Screenshot.png"));
+					temaplate.ScreenshotFilePath = Path.GetFullPath(Path.Combine(dir!, "Screenshot.png"));
 					temaplate.Screenshot = File.ReadAllBytes(temaplate.ScreenshotFilePath);
-					temaplate.ProjectFilePath = Path.GetFullPath(Path.Combine(dir, temaplate.ProjectFile));
+					temaplate.ProjectFilePath = Path.GetFullPath(Path.Combine(dir!, temaplate.ProjectFile));
 					_projectTemplates.Add(temaplate);
 				}
 				ValidateProjectPath();
@@ -151,6 +155,7 @@ namespace PrimalEditor.GameProject {
 			}
 
 		}
+#pragma warning restore CS8618
 	}
 }
 
